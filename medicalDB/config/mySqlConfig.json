@@ -1,0 +1,13 @@
+{
+    "MySqlInstance" : {
+    	"url": "",
+ 		"database": "", 
+ 		"user": "",
+ 		"pass": "",
+        "maxPreparedStatements":500,
+ 		"opts": "",
+		"connectionLimit" : "",
+        "connectTimeout" : 30000    
+
+    }
+}
