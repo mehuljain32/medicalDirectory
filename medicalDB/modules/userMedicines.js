@@ -1,5 +1,5 @@
 // let logger = require('')
-let medicineData = (parent, args, mySqlInstance) => {
+let getCustomerData = (parent, args, mySqlInstance) => {
     try {
         //id: args.id
         //name: args.name
@@ -11,7 +11,7 @@ let medicineData = (parent, args, mySqlInstance) => {
         let query = `SELECT name, address, medicine FROM user_medicines WHERE
         id = ? AND name = ?`;
         let params = [args.id, args.name];
-        connection.promise().query(query, params)
+        mySqlInstance.promise().query(query, params)
             .then((res) => {
                 let result = {
                     name: "",
@@ -40,4 +40,27 @@ let medicineData = (parent, args, mySqlInstance) => {
     }
 }
 
-module.exports.medicineData = medicineData;
+let saveCustomerData = (name, address, medicines, mySqlInstance) => {
+    try {
+        for(let obj of medicines){
+            let query = `INSERT INTO <table> (name, address, medicine) VALUES
+                (?,?,?) ON DUPLICATE KEY UPDATE name = ?, address = ?, 
+                medicine = ?`
+            
+            let params = [name, address, obj]
+            promiseArray.push(mySqlInstance.promise().execute(query, params));
+        }
+        Promise.all(promiseArray)
+        .then((res) => {
+            
+        })
+        .catch((err) => {
+
+        })
+    } catch (error) {
+        
+    }
+}
+
+module.exports.getCustomerData = getCustomerData;
+module.exports.saveCustomerData = saveCustomerData;
